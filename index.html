@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App IR wikipedia</title>
+    <script type="text/javascript" src="js/app.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="topnav">
+        <div class="search-container">
+            <input type="text" name="search" id="srInput" placeholder="Search...">
+            <button type="submit" value="clickMe" onclick="handleSearchBtn()">Buscar</button>
+        </div>
+        <div class="filter-options">
+            <h4>Ordenar por: </h4>
+            <button type="submit" value="relevancia" onclick="orderByRelevance()">Relevancia</button>
+            <button type="submit" value="fecha" onclick="orderByDate()">Fecha</button>
+            <button type="submit" value="tamanio" onclick="orderBySize()">Tamaño Página</button>
+        </div>
+    </div> 
+    <div class="container"></div> 
+</body>
+</html>
