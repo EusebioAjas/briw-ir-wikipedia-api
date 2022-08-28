@@ -4,9 +4,9 @@
 
 const BASE_URL = "https://es.wikipedia.org/w/api.php?";
 
-async function getInformation(userWord, srparams = '') {
-    let defaultParams = buildParams(params);
-    let url = `${BASE_URL}${defaultParams}${userWord}${srparams}`
+async function getInformation(userWord, srparams) {
+    let defaultParams = buildParams(srparams);
+    let url = `${BASE_URL}${defaultParams}&srsearch=${userWord}`
     try {
         let res = await fetch(url);
         return await res.json();
@@ -25,7 +25,7 @@ async function renderInformation(userWord, srparams) {
 async function handleSearchBtn() {
     try {
         let inputValue = handleEmptyTextField();
-        await renderInformation(inputValue);
+        await renderInformation(inputValue, params);
     } catch (error) {
         alert(error.message)
     }
@@ -64,7 +64,7 @@ function orderByDate() {
 async function orderByRelevance() {
     try {
         let inputValue = handleEmptyTextField();
-        await renderInformation(inputValue, "&srqiprofile=popular_inclinks");
+        await renderInformation(inputValue, paramsWithRelevance);
     } catch (error) {
         alert(error.message);
     }
@@ -101,9 +101,11 @@ function handleEmptyTextField() {
     return inputValue;
 }
 
-function EmptyTextFieldException(message) {
-    this.message = message;
-    this.name = "EmptyTextFieldError";
+class EmptyTextFieldException {
+    constructor(message) {
+        this.message = message;
+        this.name = "EmptyTextFieldError";
+    }
 }
 
 //Utils
@@ -137,5 +139,9 @@ const params = {
     'origin': '*',
     'utf8': '',
     'srlimit': 10,
-    'srsearch': ''
 };
+
+const paramsWithRelevance = {
+    ...params,
+    'srqiprofile': 'popular_inclinks'
+}
